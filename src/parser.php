@@ -83,7 +83,7 @@ if($CREATE_JSON) {
 }
 //////////////////////////////////////////////////////////
 if($CREATE_HTML) {
-	$html="<!doctype html>\n<html>\n\t<head>\n\t\t<meta charset=\"utf-8\">\n\t\t<title></title>\n\t</head>\n\t<body>\n\t\t<table width=\"100%\" border=\"1\">";
+	$html="<!doctype html>\n<html>\n\t<head>\n\t\t<meta charset=\"utf-8\">\n\t\t<title></title>\n\t</head>\n\t<body>\n\t\t<table width=\"100%\" border=\"1\">\n";
 	foreach($items as $item) {
 		$html.="\t\t\t<tr><td>".$item["name"]."</td><td>".$item["totalCase"]."</td><td>".$item["newCase"]."</td><td>".$item["totalDeath"]."</td><td>".$item["newDeath"]."</td><td>".$item["totalRecovered"]."</td><td>".$item["seriousUser"]."</td></tr>\n";
 	}
