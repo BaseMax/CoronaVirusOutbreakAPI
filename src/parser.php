@@ -67,7 +67,7 @@ $CREATE_JSON=true;
 //////////////////////////////////////////////////////////
 if($CREATE_MD_TABLE) {
 	$table="";
-	$table.="| name | totalCase | newCase | totalDeath | newDeath | totalRecovered | seriousUser\n";
+	$table.="| Name | Total Case | New Case | Total Death | New Death | Total Recovered | seriousUser\n";
 	$table.="| ---- | --------- | ------- | ---------- | -------- | -------------- | ---------- |\n";
 	foreach($items as $item) {
 		// name, totalCase, newCase, totalDeath, newDeath, totalRecovered, seriousUser
