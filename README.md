@@ -10,6 +10,11 @@ The novel coronavirus COVID-19 is affecting 45 countries and territories around 
 
 The bulk of China's new cases and deaths are reported after 22:00 GMT (5:00 PM ET) for Hubei (lately with delays of up to 2 hours), and after 00:00 GMT (7:00 PM ET) for the rest of China (lately with delays of up to 9 hours).
 
+## Output
+
+- MarkDown (MD)
+- JSON
+
 ## Corona Results
 
 Last updated: February 26, 2020, 17:00 GMT
