@@ -1,16 +1,15 @@
 <?php
 // Max Base
 // https://github.com/BaseMax/CoronaVirusOutbreakAPI
-// $file=file_get_contents("https://www.worldometers.info/coronavirus/");
-// file_put_contents("page.html", $file);
-$file=file_get_contents("page.html");
-// print $file;
-// print_r($matches);
-// <td style="font-weight: bold; font-size:15px; text-align:left; padding-left:3px;"> USA <\/td> <td style="font-weight: bold; text-align:right">57<\/td> <td style="font-weight: normal; text-align:right;"> <\/td> <td style="font-weight: bold; text-align:right;"> <\/td> <td style="font-weight: bold; text-align:right; "> <\/td> <td style="font-weight: bold; text-align:right">6 <\/td> <td style="font-weight: bold; text-align:right"> <\/td> <td style="font-size:14px; color:#aaa; text-align:right" class="hidden"> N.America <\/td> </tr>
+$file=file_get_contents("https://www.worldometers.info/coronavirus/");
+file_put_contents("page.html", $file);
+// $file=file_get_contents("page.html");
+
 function parseData($content) {
 	if($content == "" || $content == null) {
 		return [];
 	}
+	// <td style="font-weight: bold; font-size:15px; text-align:left; padding-left:3px;"> USA <\/td> <td style="font-weight: bold; text-align:right">57<\/td> <td style="font-weight: normal; text-align:right;"> <\/td> <td style="font-weight: bold; text-align:right;"> <\/td> <td style="font-weight: bold; text-align:right; "> <\/td> <td style="font-weight: bold; text-align:right">6 <\/td> <td style="font-weight: bold; text-align:right"> <\/td> <td style="font-size:14px; color:#aaa; text-align:right" class="hidden"> N.America <\/td> </tr>
 	if(preg_match_all('/<td([^\>]+|)>(\s*|)(<span([^\>]+|)>|)(?<name>[^\<]+)(<\/span>|)(\s*|)<\/td>(\s*|)<td([^\>]+|)>(?<totalCase>[^\<]+)<\/td> <td([^\>]+|)>(?<newCase>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<totalDeath>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<newDeath>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<totalRecovered>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<seriousUser>[^\<]+)<\/td>(\s*|)/i', $content, $matches)) {
 		foreach($matches as $key=>$array) {
 			if(!is_string($key)) {
@@ -31,6 +30,7 @@ function parseData($content) {
 	}
 	return [];
 }
+
 function prepareData($matches) {
 	if(!is_array($matches) || $matches == null) {
 		return [];
@@ -55,6 +55,7 @@ function prepareData($matches) {
 	}
 	return $result;
 }
+
 $matchs=parseData($file);
 $items=prepareData($matchs);
 //////////////////////////////////////////////////////////
