@@ -64,6 +64,7 @@ print_r($items);
 //////////////////////////////////////////////////////////
 $CREATE_MD_TABLE=true;
 $CREATE_JSON=true;
+$CREATE_HTML=true;
 //////////////////////////////////////////////////////////
 if($CREATE_MD_TABLE) {
 	$table="";
@@ -79,4 +80,13 @@ if($CREATE_MD_TABLE) {
 //////////////////////////////////////////////////////////
 if($CREATE_JSON) {
 	file_put_contents("output.json", json_encode($items));
+}
+//////////////////////////////////////////////////////////
+if($CREATE_HTML) {
+	$html="<!doctype html>\n<html>\n\t<head>\n\t\t<meta charset=\"utf-8\">\n\t\t<title></title>\n\t</head>\n\t<body>\n\t\t<table width=\"100%\" border=\"1\">";
+	foreach($items as $item) {
+		$html.="<tr><td>".$item["name"]."</td><td>".$item["totalCase"]."</td><td>".$item["newCase"]."</td><td>".$item["totalDeath"]."</td><td>".$item["newDeath"]."</td><td>".$item["totalRecovered"]."</td><td>".$item["seriousUser"]."</td></tr>\n";
+	}
+	$html."\t\t</table>\n\t</body>\n</html>\n";
+	file_put_contents("output.html", $html);
 }
