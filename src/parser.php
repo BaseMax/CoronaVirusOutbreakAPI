@@ -87,6 +87,6 @@ if($CREATE_HTML) {
 	foreach($items as $item) {
 		$html.="\t\t\t<tr><td>".$item["name"]."</td><td>".$item["totalCase"]."</td><td>".$item["newCase"]."</td><td>".$item["totalDeath"]."</td><td>".$item["newDeath"]."</td><td>".$item["totalRecovered"]."</td><td>".$item["seriousUser"]."</td></tr>\n";
 	}
-	$html."\t\t</table>\n\t</body>\n</html>\n";
+	$html.="\t\t</table>\n\t</body>\n</html>\n";
 	file_put_contents("output.html", $html);
 }
