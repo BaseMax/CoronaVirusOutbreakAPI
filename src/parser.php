@@ -55,3 +55,6 @@ function prepareData($matches) {
 	}
 	return $result;
 }
+$matchs=parseData($file);
+$items=prepareData($matchs);
+print_r($items);
