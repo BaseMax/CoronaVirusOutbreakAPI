@@ -57,4 +57,14 @@ function prepareData($matches) {
 }
 $matchs=parseData($file);
 $items=prepareData($matchs);
+//////////////////////////////////////////////////////////
 print_r($items);
+//////////////////////////////////////////////////////////
+if(true) {
+	print "| name | totalCase | newCase | totalDeath | newDeath | totalRecovered | seriousUser\n";
+	print "| ---- | --------- | ------- | ---------- | -------- | -------------- | ---------- |\n";
+	foreach($items as $item) {
+		// name, totalCase, newCase, totalDeath, newDeath, totalRecovered, seriousUser
+		print "| ".$item["name"]." | ".$item["totalCase"]." | ".$item["newCase"]." | ".$item["totalDeath"]." | ".$item["newDeath"]." | ".$item["totalRecovered"]." | ".$item["seriousUser"]." |\n";
+	}
+}
