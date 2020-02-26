@@ -3,7 +3,8 @@
 // https://github.com/BaseMax/CoronaVirusOutbreakAPI
 $file=file_get_contents("https://www.worldometers.info/coronavirus/");
 file_put_contents("page.html", $file);
-// $file=file_get_contents("page.html");
+$file=file_get_contents("page.html");
+// print $file;
 
 function parseData($content) {
 	if($content == "" || $content == null) {
@@ -61,11 +62,21 @@ $items=prepareData($matchs);
 //////////////////////////////////////////////////////////
 print_r($items);
 //////////////////////////////////////////////////////////
-if(true) {
-	print "| name | totalCase | newCase | totalDeath | newDeath | totalRecovered | seriousUser\n";
-	print "| ---- | --------- | ------- | ---------- | -------- | -------------- | ---------- |\n";
+$CREATE_MD_TABLE=true;
+$CREATE_JSON=true;
+//////////////////////////////////////////////////////////
+if($CREATE_MD_TABLE) {
+	$table="";
+	$table.="| name | totalCase | newCase | totalDeath | newDeath | totalRecovered | seriousUser\n";
+	$table.="| ---- | --------- | ------- | ---------- | -------- | -------------- | ---------- |\n";
 	foreach($items as $item) {
 		// name, totalCase, newCase, totalDeath, newDeath, totalRecovered, seriousUser
-		print "| ".$item["name"]." | ".$item["totalCase"]." | ".$item["newCase"]." | ".$item["totalDeath"]." | ".$item["newDeath"]." | ".$item["totalRecovered"]." | ".$item["seriousUser"]." |\n";
+		$table.="| ".$item["name"]." | ".$item["totalCase"]." | ".$item["newCase"]." | ".$item["totalDeath"]." | ".$item["newDeath"]." | ".$item["totalRecovered"]." | ".$item["seriousUser"]." |\n";
 	}
+	$table.="\n";
+	file_put_contents("output.md", $table);
+}
+//////////////////////////////////////////////////////////
+if($CREATE_JSON) {
+	file_put_contents("output.json", json_encode($items));
 }
