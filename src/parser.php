@@ -1,10 +1,9 @@
 <?php
 // Max Base
 // https://github.com/BaseMax/CoronaVirusOutbreakAPI
-// $file=file_get_contents("https://www.worldometers.info/coronavirus/");
-// file_put_contents("page.html", $file);
-$file=file_get_contents("page.html");
-// print $file;
+$file=file_get_contents("https://www.worldometers.info/coronavirus/");
+file_put_contents("page.html", $file);
+// $file=file_get_contents("page.html");
 
 function parseData($content) {
 	if($content == "" || $content == null) {
