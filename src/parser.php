@@ -1,9 +1,9 @@
 <?php
 // Max Base
 // https://github.com/BaseMax/CoronaVirusOutbreakAPI
-// $file=file_get_contents("https://www.worldometers.info/coronavirus/");
-// file_put_contents("page.html", $file);
-$file=file_get_contents("page.html");
+$file=file_get_contents("https://www.worldometers.info/coronavirus/");
+file_put_contents("page.html", $file);
+// $file=file_get_contents("page.html");
 
 function parseData($content) {
 	if($content == "" || $content == null) {
@@ -82,7 +82,7 @@ if($CREATE_JSON) {
 }
 //////////////////////////////////////////////////////////
 if($CREATE_HTML) {
-	$html="<!doctype html>\n<html>\n\t<head>\n\t\t<meta charset=\"utf-8\">\n\t\t<title></title>\n\t</head>\n\t<body>\n\t\t<h1>Corona Virus Outbreak</h1>\n\t\t<table width=\"100%\" border=\"1\">\n";
+	$html="<!doctype html>\n<html>\n\t<head>\n\t\t<meta charset=\"utf-8\">\n\t\t<title>Corona Virus Outbreak</title>\n\t</head>\n\t<body>\n\t\t<h1>Corona Virus Outbreak</h1>\n\t\t<table width=\"100%\" border=\"1\">\n";
 	// name, totalCase, newCase, totalDeath, newDeath, totalRecovered, seriousUser
 	$html.="\t\t\t<tr align=\"center\"><td>Name</td><td>Total Case</td><td>New Case</td><td>Total Death</td><td>New Death</td><td>Total Recovered</td><td>Serious User</td></tr>\n";
 	foreach($items as $item) {
