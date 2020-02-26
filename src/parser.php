@@ -31,3 +31,27 @@ function parseData($content) {
 	}
 	return [];
 }
+function prepareData($matches) {
+	if(!is_array($matches) || $matches == null) {
+		return [];
+	}
+	$result=[];
+	foreach($matches["name"] as $i=>$name) {
+		$totalCase=$matches["totalCase"][$i];
+		$newCase=$matches["newCase"][$i];
+		$totalDeath=$matches["totalDeath"][$i];
+		$newDeath=$matches["newDeath"][$i];
+		$totalRecovered=$matches["totalRecovered"][$i];
+		$seriousUser=$matches["seriousUser"][$i];
+		$result[]=[
+			"name"=>strtolower($name),
+			"totalCase"=>$totalCase,
+			"newCase"=>$newCase,
+			"totalDeath"=>$totalDeath,
+			"newDeath"=>$newDeath,
+			"totalRecovered"=>$totalRecovered,
+			"seriousUser"=>$seriousUser,
+		];
+	}
+	return $result;
+}
