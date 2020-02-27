@@ -15,6 +15,7 @@ The bulk of China's new cases and deaths are reported after 22:00 GMT (5:00 PM E
 - JSON
 - MarkDown (MD)
 - HTML
+- SQL (You can manage data in database using https://github.com/BaseMax/api-webservice-COVID-19), Anyway you can directly access to .sql format at [here](https://github.com/BaseMax/api-webservice-COVID-19/blob/master/output.sql)
 
 ## Corona Results
 
