@@ -19,7 +19,7 @@ The bulk of China's new cases and deaths are reported after 22:00 GMT (5:00 PM E
 
 ## Corona Results
 
-Last updated: February 26, 2020, 17:00 GMT
+Last updated: Wednesday, 18 March 2020
 
 | Name | Total Case | New Case | Total Death | New Death | Total Recovered | seriousUser
 | ---- | --------- | ------- | ---------- | -------- | -------------- | ---------- |
