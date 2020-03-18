@@ -2,15 +2,27 @@
 // Max Base
 // https://github.com/BaseMax/CoronaVirusOutbreakAPI
 $file=file_get_contents("https://www.worldometers.info/coronavirus/");
+$file=remove_comments($file);
 file_put_contents("page.html", $file);
 // $file=file_get_contents("page.html");
 
+function remove_comments($html) {
+	return preg_replace_callback('/<!--[\s\S]*?-->/', 'remove_comments_check', $html);
+}
+function remove_comments_check($search) {
+	// copy from stackoverflow...
+	list($l) = $search;
+	if(mb_eregi("\[if",$l) || mb_eregi("\[endif",$l)) {
+		return $l;
+	}
+}
 function parseData($content) {
 	if($content == "" || $content == null) {
 		return [];
 	}
 	// <td style="font-weight: bold; font-size:15px; text-align:left; padding-left:3px;"> USA <\/td> <td style="font-weight: bold; text-align:right">57<\/td> <td style="font-weight: normal; text-align:right;"> <\/td> <td style="font-weight: bold; text-align:right;"> <\/td> <td style="font-weight: bold; text-align:right; "> <\/td> <td style="font-weight: bold; text-align:right">6 <\/td> <td style="font-weight: bold; text-align:right"> <\/td> <td style="font-size:14px; color:#aaa; text-align:right" class="hidden"> N.America <\/td> </tr>
-	if(preg_match_all('/<td([^\>]+|)>(\s*|)(<span([^\>]+|)>|)(?<name>[^\<]+)(<\/span>|)(\s*|)<\/td>(\s*|)<td([^\>]+|)>(?<totalCase>[^\<]+)<\/td> <td([^\>]+|)>(?<newCase>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<totalDeath>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<newDeath>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<totalRecovered>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<seriousUser>[^\<]+)<\/td>(\s*|)/i', $content, $matches)) {
+	if(preg_match_all('/<td([^\>]+|)>(\s*|)(<span([^\>]+|)>|)(?<name>[^\<]+)(<\/span>|)(\s*|)<\/td>(\s*|)<td([^\>]+|)>(?<totalCase>[^\<]+)<\/td>(\s*|)(\<\!--.*?-->|)(\s*|)<td([^\>]+|)>(?<newCase>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<totalDeath>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<newDeath>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<totalRecovered>[^\<]+)<\/td>(\s*|)(<!--.*?-->|)(\s*|)<td([^\>]+|)>(?<seriousUser>[^\<]+)<\/td>(\s*|)/i', $content, $matches)) {
+		print_r($matches);
 		foreach($matches as $key=>$array) {
 			if(!is_string($key)) {
 				unset($matches[$key]);// To remove extra list, arrays!
@@ -57,6 +69,7 @@ function prepareData($matches) {
 }
 
 $matchs=parseData($file);
+print_r($matchs);
 $items=prepareData($matchs);
 //////////////////////////////////////////////////////////
 print_r($items);
@@ -74,11 +87,11 @@ if($CREATE_MD_TABLE) {
 		$table.="| ".$item["name"]." | ".$item["totalCase"]." | ".$item["newCase"]." | ".$item["totalDeath"]." | ".$item["newDeath"]." | ".$item["totalRecovered"]." | ".$item["seriousUser"]." |\n";
 	}
 	$table.="\n";
-	file_put_contents("output.md", $table);
+	file_put_contents("../output.md", $table);
 }
 //////////////////////////////////////////////////////////
 if($CREATE_JSON) {
-	file_put_contents("output.json", json_encode($items));
+	file_put_contents("../output.json", json_encode($items));
 }
 //////////////////////////////////////////////////////////
 if($CREATE_HTML) {
@@ -89,5 +102,5 @@ if($CREATE_HTML) {
 		$html.="\t\t\t<tr><td>".$item["name"]."</td><td>".$item["totalCase"]."</td><td>".$item["newCase"]."</td><td>".$item["totalDeath"]."</td><td>".$item["newDeath"]."</td><td>".$item["totalRecovered"]."</td><td>".$item["seriousUser"]."</td></tr>\n";
 	}
 	$html.="\t\t</table>\n\t</body>\n</html>\n";
-	file_put_contents("output.html", $html);
+	file_put_contents("../output.html", $html);
 }
