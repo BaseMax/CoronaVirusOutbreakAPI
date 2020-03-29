@@ -1,6 +1,13 @@
 <?php
 // MAX BASE
 // https://github.com/BaseMax/CoronaVirusOutbreakAPI
-$content=file_get_contents("page.html");
-preg_match_all('/<tr([^\>]+|)>(\s*|)<td([^\>]+|)>(\s*|)(<span([^\>]+|)>|)(<a([^\>]+|)>|)(?<name>[^\<]+)(<\/a>|)(<\/span>|)(\s*|)<\/td>(\s*|)<td([^\>]+|)>(?<totalCase>[^\<]+)<\/td>(\s*|)(\<\!--.*?-->|)(\s*|)<td([^\>]+|)>(?<newCase>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<totalDeath>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<newDeath>[^\<]+)<\/td>(\s*|)<td([^\>]+|)>(?<totalRecovered>[^\<]+)<\/td>(\s*|)(<!--.*?-->|)(\s*|)<td([^\>]+|)>(?<seriousUser>[^\<]+)<\/td>(\s*|)/i', $content, $matches);
-print_r($matches);
+$regex=explode("\n", file_get_contents("regex.txt"));
+print_r($regex);
+$content=file_get_contents("_page.html");
+preg_match($regex[0], $content, $table);
+// print_r($table);
+preg_match_all($regex[1], $table["content"], $matches);
+// print_r($matches);
+print_r($matches["name"]);
+// file_put_contents("test.txt", print_r($matches, true));
+// file_put_contents("test.txt", print_r($table, true));
